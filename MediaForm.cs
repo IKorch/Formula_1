@@ -142,9 +142,45 @@ namespace Formula_1
                 files.AddRange(Directory.GetFiles(directoryPath, extensionPattern));
             }
 
-            IEnumerable<string> orderedFiles = files
-                .Distinct(StringComparer.OrdinalIgnoreCase)
-                .OrderBy(path => Path.GetFileName(path), StringComparer.OrdinalIgnoreCase);
+            // IEnumerable<string> orderedFiles = files
+            //     .Distinct(StringComparer.OrdinalIgnoreCase)
+            //     .OrderBy(path => Path.GetFileName(path), StringComparer.OrdinalIgnoreCase);
+
+            // 1. DISTINCT: Ручне видалення дублікатів
+            List<string> orderedFiles = new List<string>();
+            foreach (string path in files)
+            {
+                bool exists = false;
+                foreach (string added in orderedFiles)
+                {
+                    if (string.Equals(path, added, StringComparison.OrdinalIgnoreCase))
+                    {
+                        exists = true;
+                        break;
+                    }
+                }
+                if (!exists)
+                {
+                    orderedFiles.Add(path);
+                }
+            }
+
+            // 2. ORDER BY: Ручне сортування бульбашками за назвою файлу. Алгоритм бульбашків я вивчав і у міській школі, а також в академії ШАГ.
+            for (int i = 0; i < orderedFiles.Count - 1; i++)
+            {
+                for (int j = 0; j < orderedFiles.Count - i - 1; j++)
+                {
+                    string fileA = GetFileNameManual(orderedFiles[j]);
+                    string fileB = GetFileNameManual(orderedFiles[j + 1]);
+
+                    if (string.Compare(fileA, fileB, StringComparison.OrdinalIgnoreCase) > 0)
+                    {
+                        string temp = orderedFiles[j];
+                        orderedFiles[j] = orderedFiles[j + 1];
+                        orderedFiles[j + 1] = temp;
+                    }
+                }
+            }
 
             foreach (string filePath in orderedFiles)
             {
@@ -158,6 +194,13 @@ namespace Formula_1
                 MediaItem mediaItemEntry = new MediaItem(displayName, filePath, isAudio);
                 _mediaItems.Add(mediaItemEntry);
             }
+        }
+
+        private string GetFileNameManual(string path)
+        {
+            int lastSeparator = path.LastIndexOfAny(new char[] { '\\', '/' });
+            if (lastSeparator == -1) return path;
+            return path.Substring(lastSeparator + 1);
         }
 
         private bool IsAudioFile(string filePath)
@@ -210,22 +253,27 @@ namespace Formula_1
             }
         }
 
-        private sealed class MediaItem
+        //Прибрав AutoFill, а також sealed
+        private class MediaItem
         {
+            private readonly string _displayName;
+            private readonly string _filePath;
+            private readonly bool _isAudio;
+
             public MediaItem(string displayName, string filePath, bool isAudio)
             {
-                DisplayName = displayName;
-                FilePath = filePath;
-                IsAudio = isAudio;
+                this._displayName = displayName;
+                this._filePath = filePath;
+                this._isAudio = isAudio;
             }
 
-            public string DisplayName { get; }
-            public string FilePath { get; }
-            public bool IsAudio { get; }
+            public string DisplayName { get { return _displayName; } }
+            public string FilePath { get { return _filePath; } }
+            public bool IsAudio { get { return _isAudio; } }
 
             public override string ToString()
             {
-                return DisplayName;
+                return this._displayName;
             }
         }
 

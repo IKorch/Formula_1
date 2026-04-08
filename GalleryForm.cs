@@ -379,16 +379,20 @@ namespace Formula_1
             }
         }
 
-        private sealed class GalleryPhoto
+        //Прибрав AutoFill, а також sealed
+        private class GalleryPhoto
         {
+            private readonly string _imagePath;
+            private readonly string _title;
+
             public GalleryPhoto(string imagePath, string title)
             {
-                ImagePath = imagePath;
-                Title = title;
+                this._imagePath = imagePath;
+                this._title = title;
             }
 
-            public string ImagePath { get; }
-            public string Title { get; }
+            public string ImagePath { get { return _imagePath; } }
+            public string Title { get { return _title; } }
         }
     }
 }
