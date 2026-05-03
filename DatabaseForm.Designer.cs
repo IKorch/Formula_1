@@ -84,6 +84,7 @@ namespace Formula_1
             // ── Form ──────────────────────────────────────────────────────────
             this.ClientSize    = new System.Drawing.Size(1200, 780);
             this.MinimumSize   = new System.Drawing.Size(1100, 700);
+            this.WindowState   = System.Windows.Forms.FormWindowState.Maximized;
             this.Text          = "Formula-1 — База даних";
             this.Name          = "DatabaseForm";
             this.BackColor     = System.Drawing.Color.FromArgb(28, 28, 36);
@@ -372,9 +373,9 @@ namespace Formula_1
             this.dgvDrivers.Size     = new System.Drawing.Size(1180, 200);
             StyleDataGridView(this.dgvDrivers);
 
-            this.panelDriverButtons.Location  = new System.Drawing.Point(8, 232);
-            this.panelDriverButtons.Size      = new System.Drawing.Size(500, 32);
-            this.panelDriverButtons.Anchor    = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            this.panelDriverButtons.Dock      = System.Windows.Forms.DockStyle.Bottom;
+            this.panelDriverButtons.Height    = 36;
+            this.panelDriverButtons.Padding   = new System.Windows.Forms.Padding(8, 4, 0, 0);
             this.panelDriverButtons.BackColor = System.Drawing.Color.Transparent;
             this.panelDriverButtons.Controls.Add(this.btnAddDriver);
             this.panelDriverButtons.Controls.Add(this.btnEditDriver);
@@ -398,9 +399,10 @@ namespace Formula_1
             StyleButtonDanger(this.btnDeleteDriver);
             this.btnDeleteDriver.Click   += new System.EventHandler(this.btnDeleteDriver_Click);
 
+            // Dock=Bottom треба додавати ДО Fill/Anchored елементів
+            this.panelDrivers.Controls.Add(this.panelDriverButtons);
             this.panelDrivers.Controls.Add(this.labelDriversTitle);
             this.panelDrivers.Controls.Add(this.dgvDrivers);
-            this.panelDrivers.Controls.Add(this.panelDriverButtons);
 
             // ── Додаємо все до форми ──────────────────────────────────────────
             this.Controls.Add(this.panelDrivers);
