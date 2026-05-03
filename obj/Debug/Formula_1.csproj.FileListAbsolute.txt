@@ -97,3 +97,6 @@ d:\Formula_1(org)\Formula_1\bin\Debug\Assets\Database\Photos\verstappen.png
 d:\Formula_1(org)\Formula_1\bin\Debug\Assets\Database\Logos\cadillac.png
 d:\Formula_1(org)\Formula_1\bin\Debug\Assets\Database\Photos\drugovich.png
 d:\Formula_1(org)\Formula_1\bin\Debug\Assets\Database\Photos\herta.png
+d:\Formula_1(org)\Formula_1\bin\Debug\Assets\Database\Photos\bottas.png
+d:\Formula_1(org)\Formula_1\bin\Debug\Assets\Database\Photos\lindblad.png
+d:\Formula_1(org)\Formula_1\bin\Debug\Assets\Database\Photos\perez.png
