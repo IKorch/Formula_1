@@ -57,6 +57,11 @@ namespace Formula_1
             OpenChildForm(new HelpForm());
         }
 
+        private void labelDatabase_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new DatabaseForm());
+        }
+
         private void labelMenu_MouseEnter(object sender, EventArgs e)
         {
             Label currentLabel = sender as Label;

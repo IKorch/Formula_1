@@ -23,6 +23,7 @@ namespace Formula_1
             this.labelGallery = new System.Windows.Forms.Label();
             this.labelMedia = new System.Windows.Forms.Label();
             this.labelHelp = new System.Windows.Forms.Label();
+            this.labelDatabase = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelTitle
@@ -113,11 +114,28 @@ namespace Formula_1
             this.labelHelp.MouseEnter += new System.EventHandler(this.labelMenu_MouseEnter);
             this.labelHelp.MouseLeave += new System.EventHandler(this.labelMenu_MouseLeave);
             // 
+            // labelDatabase
+            // 
+            this.labelDatabase.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelDatabase.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.labelDatabase.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelDatabase.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(57)))), ((int)(((byte)(43)))));
+            this.labelDatabase.Location = new System.Drawing.Point(236, 492);
+            this.labelDatabase.Name = "labelDatabase";
+            this.labelDatabase.Size = new System.Drawing.Size(328, 64);
+            this.labelDatabase.TabIndex = 6;
+            this.labelDatabase.Text = "База даних";
+            this.labelDatabase.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelDatabase.Click += new System.EventHandler(this.labelDatabase_Click);
+            this.labelDatabase.MouseEnter += new System.EventHandler(this.labelMenu_MouseEnter);
+            this.labelDatabase.MouseLeave += new System.EventHandler(this.labelMenu_MouseLeave);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(27)))), ((int)(((byte)(38)))));
-            this.ClientSize = new System.Drawing.Size(800, 520);
+            this.ClientSize = new System.Drawing.Size(800, 580);
+            this.Controls.Add(this.labelDatabase);
             this.Controls.Add(this.labelHelp);
             this.Controls.Add(this.labelMedia);
             this.Controls.Add(this.labelGallery);
@@ -141,5 +159,6 @@ namespace Formula_1
         private System.Windows.Forms.Label labelGallery;
         private System.Windows.Forms.Label labelMedia;
         private System.Windows.Forms.Label labelHelp;
+        private System.Windows.Forms.Label labelDatabase;
     }
 }

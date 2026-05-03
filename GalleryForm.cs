@@ -182,7 +182,14 @@ namespace Formula_1
             btnSlideShow.Enabled = true;
 
             GalleryPhoto selectedPhoto = _photos[_selectedPhotoIndex];
-            pictureBoxMain.Load(selectedPhoto.ImagePath);
+
+            // Завантажуємо через Bitmap а не .Load(), щоб уникнути "полосок"
+            // (PictureBox.Load() відображає JPEG прогресивно — рядок за рядком).
+            using (System.Drawing.Bitmap tmp = new System.Drawing.Bitmap(selectedPhoto.ImagePath))
+            {
+                if (pictureBoxMain.Image != null) pictureBoxMain.Image.Dispose();
+                pictureBoxMain.Image = new System.Drawing.Bitmap(tmp);
+            }
             labelPhotoTitle.Text = selectedPhoto.Title;
 
             for (int i = 0; i < _thumbnailBoxes.Count; i++)
@@ -197,7 +204,12 @@ namespace Formula_1
                     continue;
                 }
 
-                thumbnail.Load(_photos[photoIndex].ImagePath);
+                // Завантажуємо через Bitmap, щоб отримати повне фото без полосок
+                using (System.Drawing.Bitmap tmp = new System.Drawing.Bitmap(_photos[photoIndex].ImagePath))
+                {
+                    if (thumbnail.Image != null) thumbnail.Image.Dispose();
+                    thumbnail.Image = new System.Drawing.Bitmap(tmp);
+                }
                 thumbnail.Tag = photoIndex;
                 thumbnail.BorderStyle = photoIndex == _selectedPhotoIndex
                     ? BorderStyle.Fixed3D
